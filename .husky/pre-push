@@ -1,0 +1,10 @@
+branch=$(git branch | grep '*' | sed 's/* //')
+regex="^(bugfix|feature|hotfix|release|docs)/[a-zA-Z0-9\\-]+$"
+
+if [[ "$branch" = "main" || "$branch" = "develop" ]]; then
+echo "You can't commit directly to 'main' or 'develop' branch. Please create your own branch and use PR"
+exit 1
+elif [[ ! "$branch" =~ $regex ]]; then
+echo "The branch name doesn't meet requirements"
+exit 1
+fi
