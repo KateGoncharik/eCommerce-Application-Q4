@@ -5,7 +5,7 @@ import { List, ListItemButton } from '@mui/material';
 import type { CategoryData } from './catalog-navigation';
 
 export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Element => {
-  const { children, name } = category;
+  const { children, id, name } = category;
 
   const [, setSearchParams] = useSearchParams();
   const handleClick: React.MouseEventHandler<HTMLElement> = (e): void => {
@@ -14,15 +14,22 @@ export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Elem
       throw new Error('Target with id expected');
     }
     const targetId = eventTarget.id;
+
     setSearchParams({ category: targetId });
   };
-
+  const handleParentClick: React.MouseEventHandler<HTMLElement> = (): void => {
+    setSearchParams({ category: id });
+  };
   return (
     <List
       aria-labelledby="nested-list-subheader"
       component="nav"
       subheader={
-        <ListItemButton sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}>
+        <ListItemButton
+          id={id}
+          onClick={(e) => handleParentClick(e)}
+          sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}
+        >
           {name}
         </ListItemButton>
       }

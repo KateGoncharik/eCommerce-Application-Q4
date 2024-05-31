@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 
 import { Stack, Typography } from '@mui/material';
 
-import { BasicBreadcrumbs } from './bread-crumps';
+import { BasicBreadcrumbs } from './breadcrumbs';
 
 export const CatalogWrapper: FC<{
   children?: ReactNode;

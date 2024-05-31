@@ -13,7 +13,7 @@ export const CatalogItem = ({ product }: { product: Product }): JSX.Element => {
       className="mt-5 flex max-w-40 flex-col justify-center p-5"
       component={RouterLink}
       sx={{ backgroundColor: 'primary.contrastText', textDecoration: 'none' }}
-      to={`${product.id}`}
+      to={`product/${product.id}`}
       variant="outlined"
     >
       <Typography className="my-3  text-center" sx={{ fontWeight: 600 }}>

@@ -7,13 +7,9 @@ import { ProductsRequestArguments } from './catalog-types';
 import { axiosErrorMsgSchema } from './schemas/axios-error-msg.schema';
 import { type Product, getProductsResultSchema } from './schemas/product-schema';
 
-export async function getProductsByCategory(
-  categoryId: string,
-  offset = 0,
-  BEARER_TOKEN: string,
-): Promise<Product[]> {
+export async function getProductsByCategory(categoryId: string, offset = 0, BEARER_TOKEN: string): Promise<Product[]> {
   const queryArgs: ProductsRequestArguments = { limit: 7, offset };
-  const query = `/${envVariables.PROJECT_KEY}/product-projections/search?limit=${queryArgs.limit}&offset=${queryArgs.offset}&filter=categories.id:"${categoryId}"`;
+  const query = `/${envVariables.PROJECT_KEY}/product-projections/search?limit=${queryArgs.limit}&offset=${queryArgs.offset}&filter=categories.id: subtree("${categoryId}")`;
   const encoded = encodeURI(query);
   try {
     const getProductsResult = await apiInstance.get(encoded, {
