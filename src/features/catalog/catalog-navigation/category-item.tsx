@@ -20,6 +20,7 @@ export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Elem
   const handleParentClick: React.MouseEventHandler<HTMLElement> = (): void => {
     setSearchParams({ category: id });
   };
+
   return (
     <List
       aria-labelledby="nested-list-subheader"
@@ -30,7 +31,7 @@ export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Elem
           id={id}
           onClick={(e) => handleParentClick(e)}
           sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}
-          to={name.toLowerCase()}
+          to={`${name.toLowerCase()}?category=${id}`}
         >
           {name}
         </ListItemButton>
@@ -47,7 +48,7 @@ export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Elem
             key={key}
             onClick={(e) => handleClick(e)}
             sx={{ bgcolor: 'primary.light', color: 'primary.contrastText' }}
-            to={`${parentName.toLowerCase()}/${enName.toLowerCase()}`}
+            to={`${parentName.toLowerCase()}/${enName.toLowerCase()}?category=${id}`}
           >
             {enName}
           </ListItemButton>
