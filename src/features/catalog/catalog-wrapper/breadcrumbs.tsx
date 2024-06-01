@@ -7,7 +7,6 @@ import Link from '@mui/material/Link';
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
   event.preventDefault();
-  console.info('You clicked a breadcrumb.');
 }
 
 export const BasicBreadcrumbs: FC = () => {
@@ -15,7 +14,7 @@ export const BasicBreadcrumbs: FC = () => {
   const pathArray = path.split('/');
   const crumbs = pathArray.map((path, index) => {
     const last = index === path.length - 1;
-    const to = `/${pathArray.slice(0, index + 1).join('/')}`;
+    const to = `${pathArray.slice(0, index + 1).join('/')}`;
     return last ? (
       <Typography color="inherit" component={'h3'}>
         {path}

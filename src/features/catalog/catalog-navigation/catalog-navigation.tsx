@@ -1,7 +1,6 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
 
-import { ButtonGroup } from '@mui/material';
+import { List } from '@mui/material';
 
 import { getChildCategories } from '@/lib/axios/requests/get-child-categories';
 import { getParentCategories } from '@/lib/axios/requests/get-parent-categories';
@@ -19,7 +18,6 @@ export type CategoryData = {
 export const CategoriesNavigation: FC<{
   children?: ReactNode;
 }> = () => {
-  // const { category } = useParams<{ category: string }>();
   const [categories, setCategories] = useState<CategoryData[]>([]);
   const { token } = useTokenStore();
 
@@ -53,11 +51,11 @@ export const CategoriesNavigation: FC<{
   }, [token]);
 
   return categories.length > 0 ? (
-    <ButtonGroup aria-label="Vertical button group" orientation="vertical" variant="contained">
+    <List aria-labelledby="nested-list-subheader" component="nav" sx={{ bgcolor: 'primary.main', width: '20%' }}>
       {categories.map((fetchedCategory) => {
         return <CategoryItem category={fetchedCategory} key={fetchedCategory.id} />;
       })}
-    </ButtonGroup>
+    </List>
   ) : (
     <>no categories available</>
   );

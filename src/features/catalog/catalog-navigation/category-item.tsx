@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { Link as RouterLink, useSearchParams } from 'react-router-dom';
 
 import { List, ListItemButton } from '@mui/material';
 
@@ -6,7 +6,7 @@ import type { CategoryData } from './catalog-navigation';
 
 export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Element => {
   const { children, id, name } = category;
-
+  const parentName = name;
   const [, setSearchParams] = useSearchParams();
   const handleClick: React.MouseEventHandler<HTMLElement> = (e): void => {
     const eventTarget = e.target;
@@ -26,9 +26,11 @@ export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Elem
       component="nav"
       subheader={
         <ListItemButton
+          component={RouterLink}
           id={id}
           onClick={(e) => handleParentClick(e)}
           sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}
+          to={name.toLowerCase()}
         >
           {name}
         </ListItemButton>
@@ -40,10 +42,12 @@ export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Elem
         const enName = name['en-US'];
         return (
           <ListItemButton
+            component={RouterLink}
             id={id}
             key={key}
             onClick={(e) => handleClick(e)}
             sx={{ bgcolor: 'primary.light', color: 'primary.contrastText' }}
+            to={`${parentName.toLowerCase()}/${enName.toLowerCase()}`}
           >
             {enName}
           </ListItemButton>

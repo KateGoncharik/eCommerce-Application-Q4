@@ -34,7 +34,7 @@ export const routes = [
         path: '/registration',
       },
       {
-        children: [{ element: <></>, path: '/catalog/:category' }],
+        children: [{ children: [{ element: <></>, path: ':subcategory' }], element: <></>, path: ':categoryName' }],
         element: <CatalogPage />,
         path: '/catalog',
       },
