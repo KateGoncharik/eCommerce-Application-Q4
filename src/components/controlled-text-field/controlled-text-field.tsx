@@ -4,12 +4,17 @@ import { TextField } from '@mui/material';
 
 export const ControlledTextField = <T extends FieldValues>({
   control,
+  disabled = false,
   label,
   name,
+  type = 'text',
 }: {
   control: Control<T>;
-  label: string;
+  disabled?: boolean;
+  label?: string;
   name: Path<T>;
+  type?: string;
+  variant?: string;
 }): JSX.Element => {
   return (
     <Controller
@@ -18,10 +23,12 @@ export const ControlledTextField = <T extends FieldValues>({
       render={({ field, fieldState }) => {
         return (
           <TextField
+            disabled={disabled}
             error={fieldState.invalid}
             helperText={fieldState.error?.message ?? ' '}
             label={label}
             size="small"
+            type={type}
             {...field}
           />
         );

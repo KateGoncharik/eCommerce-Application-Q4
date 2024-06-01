@@ -6,8 +6,8 @@ import { Stack } from '@mui/material';
 import type { Product } from '@/lib/axios/requests/schemas/product-schema';
 
 import { CatalogItem } from '@/features/catalog/catalog-item/';
-import { CategoriesNavigation } from '@/features/catalog/catalog-navigation/catalog-navigation';
 import { CatalogWrapper } from '@/features/catalog/catalog-wrapper';
+import { CategoriesNavigation } from '@/features/catalog/categories-navigation';
 import { getAllProducts } from '@/lib/axios/requests/get-products';
 import { getProductsByCategory } from '@/lib/axios/requests/get-products-by-category';
 import { useTokenStore } from '@/stores/token-store';

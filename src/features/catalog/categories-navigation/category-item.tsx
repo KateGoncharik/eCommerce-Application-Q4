@@ -1,12 +1,12 @@
-import { Link as RouterLink, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import { List, ListItemButton } from '@mui/material';
 
-import type { CategoryData } from './catalog-navigation';
+import type { CategoryData } from './categories-navigation';
 
 export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Element => {
-  const { children, id, name } = category;
-  const parentName = name;
+  const { children, name } = category;
+
   const [, setSearchParams] = useSearchParams();
   const handleClick: React.MouseEventHandler<HTMLElement> = (e): void => {
     const eventTarget = e.target;
@@ -14,11 +14,7 @@ export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Elem
       throw new Error('Target with id expected');
     }
     const targetId = eventTarget.id;
-
     setSearchParams({ category: targetId });
-  };
-  const handleParentClick: React.MouseEventHandler<HTMLElement> = (): void => {
-    setSearchParams({ category: id });
   };
 
   return (
@@ -26,15 +22,7 @@ export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Elem
       aria-labelledby="nested-list-subheader"
       component="nav"
       subheader={
-        <ListItemButton
-          component={RouterLink}
-          id={id}
-          onClick={(e) => handleParentClick(e)}
-          sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}
-          to={`${name.toLowerCase()}?category=${id}`}
-        >
-          {name}
-        </ListItemButton>
+        <ListItemButton sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}>{name}</ListItemButton>
       }
       sx={{ bgcolor: 'primary.main', width: '100%' }}
     >
@@ -43,12 +31,10 @@ export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Elem
         const enName = name['en-US'];
         return (
           <ListItemButton
-            component={RouterLink}
             id={id}
             key={key}
             onClick={(e) => handleClick(e)}
             sx={{ bgcolor: 'primary.light', color: 'primary.contrastText' }}
-            to={`${parentName.toLowerCase()}/${enName.toLowerCase()}?category=${id}`}
           >
             {enName}
           </ListItemButton>

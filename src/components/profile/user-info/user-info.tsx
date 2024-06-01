@@ -1,28 +1,33 @@
 import type { FC } from 'react';
+import { Control } from 'react-hook-form';
 
 import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
 
-import { Customer } from '@/lib/axios/requests/schemas/customer.schema';
+import { ControlledTextField } from '@/components/controlled-text-field';
+import { AccountDetails } from '@/features/account-details-form/account-details.schema';
 
-export const UserInfo: FC<Customer> = ({ dateOfBirth, firstName, lastName }) => {
-  if (!dateOfBirth) {
-    throw Error('no data was set');
-  }
-  const dateString = new Date(dateOfBirth).toLocaleDateString();
+export const UserInfo: FC<{ control: Control<AccountDetails>; isEditMode: boolean }> = ({ control, isEditMode }) => {
   return (
     <Box>
       <Typography align="center" sx={{ fontSize: { lg: 30, md: 26, sm: 22, xs: 20 } }} variant="h2">
         Account details
       </Typography>
       <List>
-        <ListItem>
-          <ListItemText primary={`First name: ${firstName}`} />
+        <ListItem className="items-start">
+          <ListItemText className="whitespace-nowrap p-1" primary="First name:" />
+          <ControlledTextField {...{ control, disabled: !isEditMode, name: 'firstName' }} />
         </ListItem>
-        <ListItem>
-          <ListItemText primary={`Last name: ${lastName}`} />
+        <ListItem className="items-start">
+          <ListItemText className="whitespace-nowrap p-1" primary="Last name:" />
+          <ControlledTextField {...{ control, disabled: !isEditMode, name: 'lastName' }} />
         </ListItem>
-        <ListItem>
-          <ListItemText primary={`Date of Birth: ${dateString}`} />
+        <ListItem className="items-start">
+          <ListItemText className="whitespace-nowrap p-1" primary="Email:" />
+          <ControlledTextField {...{ control, disabled: !isEditMode, name: 'email' }} />
+        </ListItem>
+        <ListItem className="items-start">
+          <ListItemText className="p-1" primary="Date of birth:" />
+          <ControlledTextField {...{ control, disabled: !isEditMode, name: 'dateOfBirth', type: 'date' }} />
         </ListItem>
       </List>
     </Box>
