@@ -5,43 +5,25 @@ const CategoryReferenceSchema = z.object({
   typeId: z.string(),
 });
 
-const AttributeValueSchema = z.record(z.string());
-const AttributeSchema = z.object({
-  name: z.string(),
-  value: AttributeValueSchema,
+const ProductVariantSchema = z.object({
+  id: z.string(),
 });
 
-const MasterVariantSchema = z.object({
-  attributes: z.array(AttributeSchema),
-  id: z.number(),
-  images: z.array(
-    z.object({
-      dimensions: z.object({
-        h: z.number(),
-        w: z.number(),
-      }),
-      label: z.string().optional(),
-      url: z.string(),
-    }),
-  ),
-  prices: z.array(z.any()),
-});
-
-const productDataSchema = z.object({
+const ProductDataSchema = z.object({
   categories: z.array(CategoryReferenceSchema),
   description: z.string().optional(),
-  masterVariant: MasterVariantSchema,
+  masterVariant: ProductVariantSchema,
   name: z.string(),
   searchKeywords: z.string(),
   slug: z.record(z.string(), z.string()),
   variants: z.array(z.unknown()),
 });
 
-const productCatalogDataSchema = z.object({
-  current: productDataSchema,
+const ProductCatalogDataSchema = z.object({
+  current: ProductDataSchema,
   hasStagedChanges: z.boolean(),
   published: z.boolean(),
-  staged: productDataSchema,
+  staged: ProductDataSchema,
 });
 
 export const productSchema = z.object({
@@ -53,8 +35,8 @@ export const productSchema = z.object({
   id: z.string(),
   key: z.string(),
   lastModifiedAt: z.string(),
-  masterData: productCatalogDataSchema.optional(),
-  masterVariant: MasterVariantSchema,
+  masterData: ProductCatalogDataSchema.optional(),
+  masterVariant: z.object({}).optional(),
   metaDescription: z.object({}).optional(),
   metaTitle: z.object({}).optional(),
   name: z.record(z.string(), z.string()),

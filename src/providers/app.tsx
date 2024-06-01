@@ -8,7 +8,6 @@ import { router } from '@/routes/router';
 
 import { ReactQueryProvider } from './react-query';
 import { ThemeProvider } from './theme';
-import { ToastifyProvider } from './toastify';
 import { TokenStoreProvider } from './token-store';
 
 export const AppProvider = (): JSX.Element => {
@@ -17,9 +16,7 @@ export const AppProvider = (): JSX.Element => {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <ReactQueryProvider>
           <ThemeProvider>
-            <ToastifyProvider>
-              <RouterProvider router={router} />
-            </ToastifyProvider>
+            <RouterProvider router={router} />
           </ThemeProvider>
         </ReactQueryProvider>
       </LocalizationProvider>
