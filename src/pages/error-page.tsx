@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, isRouteErrorResponse, useRouteError } from 'react-router-dom';
 
 import { Button, Link, Typography } from '@mui/material';
 
 export default function ErrorPage(): ReactNode {
-  // const error = useRouteError();
-  // if (!isRouteErrorResponse(error)) {
-  //   throw new Error('Invalid error');
-  // }
+  const error = useRouteError();
+  if (!isRouteErrorResponse(error)) {
+    throw new Error('Invalid error');
+  }
 
   return (
     <div id="error-page">
