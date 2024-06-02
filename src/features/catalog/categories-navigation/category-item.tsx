@@ -2,7 +2,7 @@ import { Link as RouterLink, useSearchParams } from 'react-router-dom';
 
 import { List, ListItemButton } from '@mui/material';
 
-import type { CategoryData } from './catalog-navigation';
+import type { CategoryData } from './categories-navigation';
 
 export const CategoryItem = ({ category }: { category: CategoryData }): JSX.Element => {
   const { children, id, name } = category;
