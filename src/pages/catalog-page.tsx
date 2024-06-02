@@ -30,7 +30,7 @@ const CatalogPage: FC = () => {
           setProducts(products);
         },
         (error) => {
-          console.error(error);
+          console.log(error);
         },
       );
     } else {
